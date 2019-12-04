@@ -5,7 +5,7 @@ using Task1.Models.Interfaces;
 
 namespace Task1
 {
-    public class ConsoleController
+    public class ChessBoardController
     {
         private const int DEFAULT_COMMANDLINE_ARGS_COUNT = 2;
 
@@ -13,10 +13,10 @@ namespace Task1
         private readonly IBoardView _boardView;
         private IBoard _board;
 
-        public ConsoleController(string[] args = null) : this(new ChessBoardView(), args)
+        public ChessBoardController(string[] args = null) : this(new ChessBoardView(), args)
         {
         }
-        public ConsoleController(IBoardView boardView, string[] args)
+        public ChessBoardController(IBoardView boardView, string[] args)
         {
             _args = args ?? new string[] { };
             _boardView = boardView;
@@ -44,8 +44,17 @@ namespace Task1
 
         private void BuildBoard()
         {
-            int height = 0;
-            int width = 0;
+            int height;
+            int width;
+            ParseArguments(out height, out width);
+
+            _board = new ChessBoard(height, width);
+            _board.Build();
+        }
+        private void ParseArguments(out int height, out int width)
+        {
+            height = 0;
+            width = 0;
             try
             {
                 height = int.Parse(_args[0]);
@@ -71,10 +80,6 @@ namespace Task1
             {
 
             }
-
-            _board = new ChessBoard(height, width);
-            _board.Build();
         }
-
     }
 }

@@ -4,8 +4,8 @@
     {
         private static void Main(string[] args)
         {
-            ConsoleController consoleController = new ConsoleController(args);
-            consoleController.Run();
+            ChessBoardController chessBoardController = new ChessBoardController(args);
+            chessBoardController.Run();
         }
     }
 }
