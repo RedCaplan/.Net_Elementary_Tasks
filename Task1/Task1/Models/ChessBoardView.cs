@@ -8,16 +8,24 @@ namespace Task1.Models
     {
         private const char WHITE_CELL_SIGN = '*';
         private const char BLACK_CELL_SIGN = ' ';
-        private readonly IBoard _board;
-        private const string MESSAGE_HELP = @"Usages for program (Print chessboard)
-                Input arguments: <height> <width>
-                ```````````
-                Arguments
-                ```````````
-                height -> The height of the chessboard to print
-                width -> The width of the chessboard to print
-                ```````````";
+        private const string MESSAGE_HELP = @"Usages for program|Input arguments: <height> <width>";
 
+        private IBoard _board;
+
+        public ChessBoardView(IBoard board)
+        {
+            _board = board;
+        }
+
+        public ChessBoardView() : this(null)
+        {
+        }
+
+        public IBoard Board
+        {
+            get => _board;
+            set => _board = value;
+        }
 
         public void Display()
         {
@@ -40,12 +48,7 @@ namespace Task1.Models
 
         public void DisplayInstruction()
         {
-            Console.WriteLine(_helpMessage);
+            Console.WriteLine(MESSAGE_HELP);
         }   
-
-        public ChessBoardView(IBoard board)
-        {
-            _board = board;
-        }
     }
 }

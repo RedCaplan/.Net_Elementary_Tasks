@@ -8,73 +8,73 @@ namespace Task1
     public class ConsoleController
     {
         private const int DEFAULT_COMMANDLINE_ARGS_COUNT = 2;
-        private readonly IBoardView _boardView;
+
         private readonly string[] _args;
+        private readonly IBoardView _boardView;
+        private IBoard _board;
+
+        public ConsoleController(string[] args = null) : this(new ChessBoardView(), args)
+        {
+        }
+        public ConsoleController(IBoardView boardView, string[] args)
+        {
+            _args = args ?? new string[] { };
+            _boardView = boardView;
+        }
 
         public void Run()
         {
             switch (_args.Length)
             {
                 case DEFAULT_COMMANDLINE_ARGS_COUNT:
-                {
-                    int height = 0;
-                    int width = 0;
-
-                    try
                     {
-                        height = int.Parse(_args[0]);
-                        width = int.Parse(_args[1]);
-
-                        if (height < 0 || width < 0)
-                            throw new ArgumentOutOfRangeException("Height and width must be positive" );
+                        BuildBoard();
+                        _boardView.Board = _board;
+                        _boardView.Display();
+                        break;
                     }
-                    catch (FormatException ex)
-                    {
-
-                    }
-                    catch (OverflowException ex)
-                    {
-
-                    }
-                    catch (ArgumentOutOfRangeException ex)
-                    {
-
-                    }
-
-                    var board = new ChessBoard(height, width);
-                    board.Build();
-
-                    var view = new ChessBoardView(board);
-                    view.Display();
-                    break;
-                }
                 default:
-                {
-                    DisplayInstruction();
-                    break;
-                }
+                    {
+                        _boardView.DisplayInstruction();
+                        break;
+                    }
             }
 
         }
-        
-        private void DisplayInstruction()
+
+        private void BuildBoard()
         {
-            StringBuilder helpMessage = new StringBuilder();
-            helpMessage.AppendLine()
-                .AppendLine("Usages for program (Print chessboard)")
-                .AppendLine("Input arguments: <height> <width>")
-                .AppendLine("```````````")
-                .AppendLine("Arguments")
-                .AppendLine("```````````")
-                .AppendLine("height -> The height of the chessboard to print")
-                .AppendLine(" width -> The width of the chessboard to print")
-                .AppendLine("```````````");
-            Console.WriteLine(helpMessage);
+            int height = 0;
+            int width = 0;
+            try
+            {
+                height = int.Parse(_args[0]);
+                if (height < 0)
+                {
+                    throw new ArgumentOutOfRangeException("height");
+                }
+                width = int.Parse(_args[1]);
+                if (width < 0)
+                {
+                    throw new ArgumentOutOfRangeException("width");
+                }
+            }
+            catch (FormatException ex)
+            {
+
+            }
+            catch (OverflowException ex)
+            {
+
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+
+            }
+
+            _board = new ChessBoard(height, width);
+            _board.Build();
         }
 
-        public ConsoleController(string[] args = null)
-        {
-            _args = args ?? new string[] { };
-        }
     }
 }

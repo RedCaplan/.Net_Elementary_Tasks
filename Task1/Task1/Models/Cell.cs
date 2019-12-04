@@ -5,11 +5,12 @@ namespace Task1.Models
 {
     class Cell : ICell
     {
-        public GameColor Color { get; }
-
         public Cell(GameColor color)
         {
             Color = color;
         }
+
+        public GameColor Color { get; }
+
     }
 }

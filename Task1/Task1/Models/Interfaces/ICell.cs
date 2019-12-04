@@ -2,7 +2,7 @@
 
 namespace Task1.Models.Interfaces
 {
-    interface ICell
+    public interface ICell
     {
         GameColor Color { get; }
     }

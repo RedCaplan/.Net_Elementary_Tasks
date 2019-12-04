@@ -1,6 +1,6 @@
 ﻿namespace Task1.Models.Interfaces
 {
-    interface IBoard
+    public interface IBoard
     {
         int Height { get; }
         int Width { get; }

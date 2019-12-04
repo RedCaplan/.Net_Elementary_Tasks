@@ -1,4 +1,5 @@
-﻿using Task1.Models.Enums;
+﻿using System;
+using Task1.Models.Enums;
 using Task1.Models.Interfaces;
 
 namespace Task1.Models
@@ -9,29 +10,14 @@ namespace Task1.Models
 
         public ChessBoard(int height, int width)
         {
-            if (height < 0)
-            {
-                Height = 0;
-            }
-            else
-            {
-                Height = height;
-            }
-
-            if (Width < 0)
-            {
-                Width = 0;
-            }
-            else
-            {
-                Width = width;
-            }
-
+            Height = Math.Max(height, 0);
+            Width = Math.Max(width, 0);
             board = new Cell[Height, Width];
         }
 
         public int Height { get; }
         public int Width { get; }
+
         public ICell this[int height, int width] => board[height, width];
 
         public void Build()

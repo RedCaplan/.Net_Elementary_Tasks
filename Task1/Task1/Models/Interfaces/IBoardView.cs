@@ -1,7 +1,9 @@
 ﻿namespace Task1.Models.Interfaces
 {
-    interface IBoardView
+    public interface IBoardView
     {
+        IBoard Board { get; set; }
+
         void Display();
         void DisplayInstruction();
     }
