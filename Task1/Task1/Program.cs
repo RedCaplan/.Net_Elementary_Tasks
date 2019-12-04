@@ -4,7 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            ConsoleController consoleController = new ConsoleController(args);
+            ChessBoardController consoleController = new ChessBoardController(args);
             consoleController.Run();
         }
     }
