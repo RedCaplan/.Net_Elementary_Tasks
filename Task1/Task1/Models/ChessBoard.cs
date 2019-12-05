@@ -6,33 +6,34 @@ namespace Task1.Models
 {
     class ChessBoard : IBoard
     {
-        private readonly ICell[,] board;
+        private readonly ICell[,] _board;
+        private readonly BoardSize _boardSize;
 
-        public ChessBoard(int height, int width)
+        public ChessBoard(BoardSize boardSize)
         {
-            Height = Math.Max(height, 0);
-            Width = Math.Max(width, 0);
-            board = new Cell[Height, Width];
+            _boardSize = boardSize;
+            _board = new Cell[boardSize.Height, boardSize.Width];
         }
 
-        public int Height { get; }
-        public int Width { get; }
-
-        public ICell this[int height, int width] => board[height, width];
+        public BoardSize BoardSize
+        {
+            get => _boardSize;
+        }
+        public ICell this[int height, int width] => _board[height, width];
 
         public void Build()
         {
-            for (var row = 0; row < Height; row++)
+            for (var row = 0; row < _boardSize.Height; row++)
             {
-                for (var column = 0; column < Width; column++)
+                for (var column = 0; column < _boardSize.Width; column++)
                 {
                     if ((row + column) % 2 == 0) 
                     {
-                        board[row, column] = new Cell(GameColor.White);
+                        _board[row, column] = new Cell(GameColor.White);
                     }
                     else
                     {
-                        board[row, column] = new Cell(GameColor.Black);
+                        _board[row, column] = new Cell(GameColor.Black);
                     }
                 }
             }

@@ -44,30 +44,10 @@ namespace Task1
 
         private void BuildBoard()
         {
-            int height = 0;
-            int width = 0;
-            ParseArguments(out height, out width);
-
-            _board = new ChessBoard(height, width);
-            _board.Build();
-        }
-
-        private void ParseArguments(out int height, out int width)
-        {
-            height = 0;
-            width = 0;
+            BoardSize boardSize = new BoardSize(0,0);
             try
             {
-                height = int.Parse(_args[0]);
-                if (height < 0)
-                {
-                    throw new ArgumentOutOfRangeException("height");
-                }
-                width = int.Parse(_args[1]);
-                if (width < 0)
-                {
-                    throw new ArgumentOutOfRangeException("width");
-                }
+               boardSize = ParseArguments();
             }
             catch (FormatException ex)
             {
@@ -81,6 +61,26 @@ namespace Task1
             {
 
             }
+
+            _board = new ChessBoard(boardSize);
+            _board.Build();
+        }
+
+        private BoardSize ParseArguments()
+        {
+            int height = int.Parse(_args[0]);
+            if (height < 0)
+            {
+                throw new ArgumentOutOfRangeException("height");
+            }
+
+            int width = int.Parse(_args[1]);
+            if (width < 0)
+            {
+                throw new ArgumentOutOfRangeException("width");
+            }
+
+            return new BoardSize(height, width);
         }
 
     }

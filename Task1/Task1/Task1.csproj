@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessBoardController.cs" />
+    <Compile Include="Models\BoardSize.cs" />
     <Compile Include="Models\Cell.cs" />
     <Compile Include="Models\ChessBoardView.cs" />
     <Compile Include="Models\Enums\GameColor.cs" />

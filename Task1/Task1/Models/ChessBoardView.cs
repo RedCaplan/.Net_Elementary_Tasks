@@ -17,8 +17,9 @@ namespace Task1.Models
             _board = board;
         }
 
-        public ChessBoardView() : this(null)
+        public ChessBoardView()
         {
+            _board = new ChessBoard(new BoardSize(0,0));
         }
 
         public IBoard Board
@@ -29,9 +30,9 @@ namespace Task1.Models
 
         public void Display()
         {
-            for (var row = 0; row < _board.Height; row++)
+            for (var row = 0; row < _board.BoardSize.Height; row++)
             {
-                for (var column = 0; column < _board.Width; column++)
+                for (var column = 0; column < _board.BoardSize.Width; column++)
                 {
                     if (_board[row, column].Color == GameColor.White)
                     {

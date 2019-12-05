@@ -2,9 +2,8 @@
 {
     public interface IBoard
     {
-        int Height { get; }
-        int Width { get; }
-       
+        BoardSize BoardSize { get;
+        }
         ICell this[int height, int width] { get; }
 
         void Build();
