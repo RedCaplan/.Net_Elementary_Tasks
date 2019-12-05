@@ -1,5 +1,4 @@
-﻿using System;
-using Task1.Models.Enums;
+﻿using Task1.Models.Enums;
 using Task1.Models.Interfaces;
 
 namespace Task1.Models

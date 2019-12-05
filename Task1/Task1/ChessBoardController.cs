@@ -1,5 +1,5 @@
-﻿using System;
-using System.Text;
+﻿using Serilog;
+using System;
 using Task1.Models;
 using Task1.Models.Interfaces;
 
@@ -24,6 +24,7 @@ namespace Task1
 
         public void Run()
         {
+            Log.Information("Inputed arguments: {Args} ", _args);
             switch (_args.Length)
             {
                 case DEFAULT_COMMANDLINE_ARGS_COUNT:
@@ -44,23 +45,19 @@ namespace Task1
 
         private void BuildBoard()
         {
-            BoardSize boardSize = new BoardSize(0,0);
+            BoardSize boardSize = new BoardSize(0, 0);
             try
             {
-               boardSize = ParseArguments();
+                Log.Information("Parsing arguments");
+                boardSize = ParseArguments();
             }
-            catch (FormatException ex)
+            catch (Exception ex) when(ex is FormatException
+                                   || ex is OverflowException  
+                                   || ex is ArgumentOutOfRangeException)
             {
-
+                Log.Error(ex, "Exception thrown");
             }
-            catch (OverflowException ex)
-            {
-
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-
-            }
+           
 
             _board = new ChessBoard(boardSize);
             _board.Build();
