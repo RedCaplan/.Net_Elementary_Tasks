@@ -59,7 +59,7 @@ namespace Task3
                 isActive = CONTINUE_KEY.Contains(userInput);
             }
             _triangles.Sort();
-            _triangleView.Triangles = _triangles;
+            _triangleView.Triangles = _triangles.ToList();
             _triangleView.DisplayTriangles();
         }
 
