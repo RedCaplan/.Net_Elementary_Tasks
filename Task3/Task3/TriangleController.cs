@@ -70,14 +70,20 @@ namespace Task3
             Log.Information("Getted triangle: {name}, {sideA}, {sideB}, {sideC}",
                 triangleDTO.Name, triangleDTO.Sides.SideA, triangleDTO.Sides.SideB, triangleDTO.Sides.SideC);
 
-            if (triangleDTO.Sides.SideA < 0)
+            if (triangleDTO.Sides.SideA <= 0)
+            {
                 throw new ArgumentOutOfRangeException("SideA", "Must be greater than 0");
+            }
 
-            if (triangleDTO.Sides.SideB < 0)
+            if (triangleDTO.Sides.SideB <= 0)
+            {
                 throw new ArgumentOutOfRangeException("SideB", "Must be greater than 0");
+            }
 
-            if (triangleDTO.Sides.SideC < 0)
+            if (triangleDTO.Sides.SideC <= 0)
+            {
                 throw new ArgumentOutOfRangeException("SideC", "Must be greater than 0");
+            }
 
             return Triangle.Build(triangleDTO.Sides, triangleDTO.Name);
         }

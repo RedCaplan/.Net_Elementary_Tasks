@@ -64,8 +64,10 @@ namespace Task3
             Console.WriteLine(MESSAGE_TRIANGLE_ADD);
             string[] arguments = Console.ReadLine().Split(',');
 
-            if(arguments.Length != 4)
+            if (arguments.Length != 4)
+            {
                 throw new ArgumentOutOfRangeException("argument line", "Must be 4 arguments");
+            }
 
             string name = arguments[0];
             double sideA = double.Parse(arguments[1]);
