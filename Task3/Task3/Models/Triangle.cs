@@ -4,10 +4,10 @@ namespace Task3.Models
 {
     public class Triangle : IComparable<Triangle>
     {
-        private string _name;
-        private TriangleSides _sides;
-        private double _area;
-        private double _perimeter;
+        private readonly string _name;
+        private readonly TriangleSides _sides;
+        private readonly double _area;
+        private readonly double _perimeter;
 
         private Triangle(TriangleSides triangleSides, string name = "")
         {
