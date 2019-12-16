@@ -1,11 +1,10 @@
 ﻿using System;
+using Task6.Models.Constants;
 
 namespace Task6
 {
     public class TicketView
     {
-        private const string MESSAGE_HELP = @"Usages for program|Input arguments: <filepath>, |(optional) <minrange>, <maxrange>|";
-
         public TicketView()
         {
         }
@@ -17,7 +16,7 @@ namespace Task6
 
         public void DisplayInstruction()
         {
-            Console.WriteLine(MESSAGE_HELP);
+            Console.WriteLine(Messages.MESSAGE_HELP);
         }
     }
 }

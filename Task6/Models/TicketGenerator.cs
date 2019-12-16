@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Task6.Models
@@ -8,13 +9,35 @@ namespace Task6.Models
         private readonly int _minRange;
         private readonly int _maxRange;
 
-        public TicketGenerator(int minRange, int maxRange)
+        private TicketGenerator(int minRange, int maxRange)
         {
             _minRange = minRange;
             _maxRange = maxRange;
         }
 
+        public static TicketGenerator Build(int minRange, int maxRange)
+        {
+            if (minRange < 0)
+            {
+                throw new ArgumentOutOfRangeException("minRange",
+                    "Must be positive");
+            }
+            if (maxRange < 0)
+            {
+                throw new ArgumentOutOfRangeException("minRange",
+                    "Must be positive");
+            }
+            if (minRange < maxRange)
+            {
+                throw new ArgumentOutOfRangeException("Range",
+                    "minRange is greater than the maxRange");
+            }
+
+            return new TicketGenerator(minRange, minRange);
+        }
+
         public int MinRange => _minRange;
+
         public int MaxRange => _maxRange;
 
         public IEnumerator<Ticket> GetEnumerator()
