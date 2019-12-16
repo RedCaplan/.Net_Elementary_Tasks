@@ -58,10 +58,22 @@ namespace Task6
 
                 Log.Information("LuckyTickets count: {luckyTickets}", luckyTickets);
             }
-            catch (Exception ex) when (ex is FormatException
-                                       || ex is ArgumentOutOfRangeException
-                                       || ex is OverflowException
-                                       || ex is FileNotFoundException)
+            catch(FormatException ex)
+            {
+                message = ex.Message;
+                Log.Error(ex, "Exception thrown");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                message = ex.Message;
+                Log.Error(ex, "Exception thrown");
+            }
+            catch (OverflowException ex)
+            {
+                message = ex.Message;
+                Log.Error(ex, "Exception thrown");
+            }
+            catch (FileNotFoundException ex)
             {
                 message = ex.Message;
                 Log.Error(ex, "Exception thrown");
