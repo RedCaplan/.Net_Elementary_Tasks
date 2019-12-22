@@ -9,8 +9,6 @@ namespace Task6
     public class TicketController
     {
         private const int DEFAULT_COMMANDLINE_ARGS_COUNT = 1;
-        private const int DEFAULT_MIN_RANGE = 0;
-        private const int DEFAULT_MAX_RANGE = 999999;
         private const int PATH_AND_RANGE_ARGS_COUNT = 3;
 
         private readonly string[] _args;
@@ -29,41 +27,30 @@ namespace Task6
         {
             Log.Information("New start with args: {args}", _args);
 
-            if (_args.Length != DEFAULT_COMMANDLINE_ARGS_COUNT
-                && _args.Length != PATH_AND_RANGE_ARGS_COUNT)
-            {
-                _ticketView.DisplayInstruction();
-
-                return;
-            }
-
             string message = "";
             try
             {
-                TicketGenerator ticketGenerator;
-                if (_args.Length == PATH_AND_RANGE_ARGS_COUNT)
-                {
-                    ticketGenerator = ParseTicketGenerator();
-                }
-                else
-                {
-                    ticketGenerator = new TicketGenerator(DEFAULT_MIN_RANGE, DEFAULT_MAX_RANGE);
-                }
-                Log.Information("Getted range: {minRange}, {maxRange}",
-                    ticketGenerator.MinRange, ticketGenerator.MaxRange);
-
+                TicketGenerator ticketGenerator = ParseTicketGenerator();
                 TicketCounter ticketCounter = ParseTicketCounter(ticketGenerator);
                 int luckyTickets = ticketCounter.CountLuckyTickets();
-                message = string.Format("Lucky tickets count: {0}", luckyTickets);
 
+                message = string.Format("Lucky tickets count: {0}", luckyTickets);
                 Log.Information("LuckyTickets count: {luckyTickets}", luckyTickets);
             }
-            catch (Exception ex) when (ex is FormatException
-                                       || ex is ArgumentOutOfRangeException
-                                       || ex is OverflowException
-                                       || ex is FileNotFoundException)
+            catch (FormatException ex)
             {
-                message = ex.Message;
+                Log.Error(ex, "Exception thrown");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Log.Error(ex, "Exception thrown");
+            }
+            catch (OverflowException ex)
+            {
+                Log.Error(ex, "Exception thrown");
+            }
+            catch (FileNotFoundException ex)
+            {
                 Log.Error(ex, "Exception thrown");
             }
 
@@ -79,14 +66,13 @@ namespace Task6
             }
 
             string mode;
-            TicketCounter ticketCounter;
-
             using (StreamReader streamReader = new StreamReader(path))
             {
                 mode = streamReader.ReadLine()?.ToLower();
                 Log.Information("Getted mode: {mode}", mode);
             }
 
+            TicketCounter ticketCounter;
             switch (mode)
             {
                 case TicketCounterNames.MOSCOW:
@@ -101,7 +87,8 @@ namespace Task6
                     }
                 default:
                     {
-                        throw new ArgumentOutOfRangeException("mode", "No such method of counting");
+                        throw new ArgumentOutOfRangeException("mode",
+                            "No such method of counting");
                     }
             }
 
@@ -110,24 +97,33 @@ namespace Task6
 
         private TicketGenerator ParseTicketGenerator()
         {
-            int minRange = int.Parse(_args[1]);
-            int maxRange = int.Parse(_args[2]);
+            int minRange = 0;
+            int maxRange = 0;
 
-            if (minRange < 0)
+            switch (_args.Length)
             {
-                throw new ArgumentOutOfRangeException("minRange", "Must be positive");
-            }
-            if (maxRange < 0)
-            {
-                throw new ArgumentOutOfRangeException("maxRange", "Must be positive");
+                case DEFAULT_COMMANDLINE_ARGS_COUNT:
+                    {
+                        Log.Information("Using default range");
+                        minRange = Settings.DEFAULT_GENERATOR_MIN_RANGE;
+                        maxRange = Settings.DEFAULT_GENERATOR_MAX_RANGE;
+                        break;
+                    }
+                case PATH_AND_RANGE_ARGS_COUNT:
+                    {
+                        minRange = int.Parse(_args[1]);
+                        maxRange = int.Parse(_args[2]);
+                        break;
+                    }
+                default:
+                    {
+                        _ticketView.DisplayInstruction();
+                        throw new ArgumentOutOfRangeException("arguments",
+                            "No mode with this number of arguments");
+                    }
             }
 
-            if (minRange > maxRange)
-            {
-                throw new ArgumentOutOfRangeException("range", "The Minimum range must be greater than or equal to the maximum");
-            }
-
-            return new TicketGenerator(minRange, maxRange);
+            return TicketGenerator.Build(minRange,maxRange);
         }
     }
 }

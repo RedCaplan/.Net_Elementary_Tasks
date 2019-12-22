@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Constants\Messages.cs" />
+    <Compile Include="Models\Constants\Settings.cs" />
     <Compile Include="Models\Constants\TicketCounterNames.cs" />
     <Compile Include="Models\ExtensionMethods\IntExtensions.cs" />
     <Compile Include="Models\MoscowTicketCounter.cs" />
