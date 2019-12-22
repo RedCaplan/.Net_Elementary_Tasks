@@ -14,7 +14,7 @@ namespace Task6.Models
             int[] sequence = ticket.Number.ToArray(_ranks);
             int sum = 0;
 
-            for (int i = 0; i < sequence.Length / 2; i += 2)
+            for (int i = 0; i < sequence.Length; i += 2)
             {
                 sum += sequence[i] - sequence[i + 1];
             }

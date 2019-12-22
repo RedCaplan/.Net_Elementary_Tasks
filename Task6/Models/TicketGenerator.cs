@@ -27,13 +27,13 @@ namespace Task6.Models
                 throw new ArgumentOutOfRangeException("minRange",
                     "Must be positive");
             }
-            if (minRange < maxRange)
+            if (minRange >= maxRange)
             {
                 throw new ArgumentOutOfRangeException("Range",
                     "minRange is greater than the maxRange");
             }
 
-            return new TicketGenerator(minRange, minRange);
+            return new TicketGenerator(minRange, maxRange);
         }
 
         public int MinRange => _minRange;
