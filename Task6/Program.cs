@@ -11,8 +11,9 @@ namespace Task6
                 .WriteTo.File("log.txt")
                 .CreateLogger();
 
+            Log.Information("New start with args: {args}", args);
             TicketView ticketView = new TicketView();
-            TicketController ticketController = new TicketController(ticketView, args);
+            TicketController ticketController = new TicketController(ticketView);
             ticketController.Run();
         }
     }

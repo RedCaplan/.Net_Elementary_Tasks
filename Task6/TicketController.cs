@@ -1,36 +1,27 @@
 ﻿using System;
 using System.IO;
 using Serilog;
+using Task6.Constants;
 using Task6.Models;
-using Task6.Models.Constants;
 
 namespace Task6
 {
     public class TicketController
     {
-        private const int DEFAULT_COMMANDLINE_ARGS_COUNT = 1;
-        private const int PATH_AND_RANGE_ARGS_COUNT = 3;
-
-        private readonly string[] _args;
         private readonly TicketView _ticketView;
 
-        public TicketController(TicketView ticketView, string[] args)
+        public TicketController(TicketView ticketView)
         {
-            _args = args ?? new string[] { };
             _ticketView = ticketView;
-        }
-        public TicketController(string[] args = null) : this(new TicketView(), args)
-        {
         }
 
         public void Run()
         {
-            Log.Information("New start with args: {args}", _args);
-
             string message = string.Empty;
             try
             {
-                TicketGenerator ticketGenerator = ParseTicketGenerator();
+                TicketGeneratorDTO generatorDTO = _ticketView.GetTicketGenerator();
+                TicketGenerator ticketGenerator = TicketGenerator.Build(generatorDTO);
                 TicketCounter ticketCounter = ParseTicketCounter(ticketGenerator);
                 int luckyTickets = ticketCounter.CountLuckyTickets();
 
@@ -39,18 +30,22 @@ namespace Task6
             }
             catch (FormatException ex)
             {
+                _ticketView.DisplayInstruction();
                 Log.Error(ex, "Exception thrown");
             }
             catch (ArgumentOutOfRangeException ex)
             {
+                _ticketView.DisplayInstruction();
                 Log.Error(ex, "Exception thrown");
             }
             catch (OverflowException ex)
             {
+                _ticketView.DisplayInstruction();
                 Log.Error(ex, "Exception thrown");
             }
             catch (FileNotFoundException ex)
             {
+                _ticketView.DisplayInstruction();
                 Log.Error(ex, "Exception thrown");
             }
 
@@ -59,7 +54,7 @@ namespace Task6
 
         private TicketCounter ParseTicketCounter(TicketGenerator generator)
         {
-            string path = _args[0];
+            string path = _ticketView.GetModeFilePath();
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException();
@@ -93,37 +88,6 @@ namespace Task6
             }
 
             return ticketCounter;
-        }
-
-        private TicketGenerator ParseTicketGenerator()
-        {
-            int minRange = 0;
-            int maxRange = 0;
-
-            switch (_args.Length)
-            {
-                case DEFAULT_COMMANDLINE_ARGS_COUNT:
-                    {
-                        Log.Information("Using default range");
-                        minRange = Settings.DEFAULT_GENERATOR_MIN_RANGE;
-                        maxRange = Settings.DEFAULT_GENERATOR_MAX_RANGE;
-                        break;
-                    }
-                case PATH_AND_RANGE_ARGS_COUNT:
-                    {
-                        minRange = int.Parse(_args[1]);
-                        maxRange = int.Parse(_args[2]);
-                        break;
-                    }
-                default:
-                    {
-                        _ticketView.DisplayInstruction();
-                        throw new ArgumentOutOfRangeException("arguments",
-                            "No mode with this number of arguments");
-                    }
-            }
-
-            return TicketGenerator.Build(minRange,maxRange);
         }
     }
 }

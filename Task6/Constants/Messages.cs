@@ -1,6 +1,6 @@
-﻿namespace Task6.Models.Constants
+﻿namespace Task6.Constants
 {
-    static public class Messages
+    public static class Messages
     {
         public const string MESSAGE_HELP = @"Input arguments: <filepath>, |(optional) <minrange>, <maxrange>|";
     }

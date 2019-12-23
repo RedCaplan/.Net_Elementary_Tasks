@@ -1,5 +1,4 @@
 ﻿using Task6.Models;
-using Task6.Models.ExtensionMethods;
 using Xunit;
 
 namespace Task6.Tests

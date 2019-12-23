@@ -36,6 +36,11 @@ namespace Task6.Models
             return new TicketGenerator(minRange, maxRange);
         }
 
+        public static TicketGenerator Build(TicketGeneratorDTO ticketGeneratorDTO)
+        {
+            return Build(ticketGeneratorDTO.MinRange, ticketGeneratorDTO.MaxRange);
+        }
+
         public int MinRange => _minRange;
 
         public int MaxRange => _maxRange;

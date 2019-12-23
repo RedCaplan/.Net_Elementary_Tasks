@@ -1,5 +1,4 @@
-﻿using System;
-using Task6.Models.ExtensionMethods;
+﻿using Task6.ExtensionMethods;
 
 namespace Task6.Models
 {

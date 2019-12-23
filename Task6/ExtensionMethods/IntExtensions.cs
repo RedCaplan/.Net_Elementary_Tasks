@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task6.Models.ExtensionMethods
+namespace Task6.ExtensionMethods
 {
     public static class IntExtensions
     {

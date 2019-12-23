@@ -1,6 +1,6 @@
-﻿namespace Task6.Models.Constants
+﻿namespace Task6.Constants
 {
-    static public class TicketCounterNames
+    public static class TicketCounterNames
     {
         public const string MOSCOW = "moscow";
         public const string PITER = "piter";
