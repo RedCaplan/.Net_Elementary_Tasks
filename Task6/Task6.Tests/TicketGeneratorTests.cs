@@ -19,12 +19,12 @@ namespace Task6.Tests
                 ()=>TicketGenerator.Build(minRange, maxRange));
         }
 
-        [Fact]
-        public void GeneratorMakesTheCorrectAmountOfTickets()
+        [Theory]
+        [InlineData(0,10,11)]
+        [InlineData(100, 500, 401)]
+        [InlineData(0, 999999, 1000000)]
+        public void GeneratorMakesTheCorrectAmountOfTickets(int minRange, int maxRange, int ticketsAmount)
         {
-            int minRange = 1;
-            int maxRange = 10;
-            int ticketsAmount = maxRange - minRange + 1;
             TicketGenerator ticketGenerator = TicketGenerator.Build(minRange, maxRange);
             int count = 0;
 

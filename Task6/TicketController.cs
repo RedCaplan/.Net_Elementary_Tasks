@@ -27,7 +27,7 @@ namespace Task6
         {
             Log.Information("New start with args: {args}", _args);
 
-            string message = "";
+            string message = string.Empty;
             try
             {
                 TicketGenerator ticketGenerator = ParseTicketGenerator();

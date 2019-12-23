@@ -63,8 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MoscowTicketCounterTests.cs" />
+    <Compile Include="PiterTicketCounterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TicketCounterTests.cs" />
     <Compile Include="TicketGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
