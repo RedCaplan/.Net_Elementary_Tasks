@@ -36,7 +36,5 @@ namespace Task6.Tests
 
             Assert.Equal(expectedAmount, amount);
         }
-
-
     }
 }

@@ -22,5 +22,19 @@ namespace Task6.Tests
 
             Assert.Equal(result, isLucky);
         }
+
+        [Fact]
+        public void TestPiterTicketLuckyCountCorrect()
+        {
+            int minRange = 0;
+            int maxRange = 999999;
+            TicketGenerator ticketGenerator = TicketGenerator.Build(minRange, maxRange);
+            TicketCounter ticketCounter = new PiterTicketCounter(ticketGenerator);
+            int expectedAmount = 55252;
+
+            int amount = ticketCounter.CountLuckyTickets();
+
+            Assert.Equal(expectedAmount, amount);
+        }
     }
 }
