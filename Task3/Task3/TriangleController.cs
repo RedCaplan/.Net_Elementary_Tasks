@@ -8,7 +8,6 @@ namespace Task3
 {
     public class TriangleController
     {
-
         private static readonly string[] CONTINUE_KEY = { "y", "yes" };
 
         private readonly TriangleView _triangleView;
@@ -19,6 +18,7 @@ namespace Task3
             _triangleView = triangleView;
             _triangles = new List<Triangle>();
         }
+
         public TriangleController() : this(new TriangleView())
         {
         }

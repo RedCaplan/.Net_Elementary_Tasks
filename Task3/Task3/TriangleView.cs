@@ -9,6 +9,7 @@ namespace Task3
         private const string MESSAGE_HELP = @"Usages for program|Input arguments: <name>, <sideA>, <sideB>, <sideC>";
         private const string MESSAGE_TRIANGLE_ADD = @"Add triangle: <name>, <sideA>, <sideB>, <sideC>";
         private const string MESSAGE_CONTINUE_ADDING = @"Add new triangle? y/yes -> continue  | any other -> print";
+        private const int DEFAULT_COMMANDLINE_ARGS_COUNT = 4;
 
         public void Display(string message = "")
         {
@@ -47,7 +48,7 @@ namespace Task3
             Console.WriteLine(MESSAGE_TRIANGLE_ADD);
             string[] arguments = Console.ReadLine()?.Split(',');
 
-            if (arguments?.Length != 4)
+            if (arguments?.Length != DEFAULT_COMMANDLINE_ARGS_COUNT)
             {
                 throw new ArgumentOutOfRangeException("argument line", "Must be 4 arguments");
             }
