@@ -2,13 +2,20 @@
 {
     public class TriangleDTO
     {
-        public TriangleDTO(string name, TriangleSides sides)
+        public TriangleDTO(double sideA, double sideB, double sideC, string name = "")
         {
             Name = name;
-            Sides = sides;
+            SideA = sideA;
+            SideB = sideB;
+            SideC = sideC;
         }
 
         public string Name { get; }
-        public TriangleSides Sides { get; }
+
+        public double SideA { get; }
+
+        public double SideB { get; }
+
+        public double SideC { get; }
     }
 }
