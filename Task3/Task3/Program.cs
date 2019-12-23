@@ -2,7 +2,7 @@
 
 namespace Task3
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -11,7 +11,8 @@ namespace Task3
                 .WriteTo.File("log.txt")
                 .CreateLogger();
 
-            TriangleController triangleController = new TriangleController(args);
+            TriangleView triangleView = new TriangleView();
+            TriangleController triangleController = new TriangleController(triangleView);
             triangleController.Run();
         }
     }

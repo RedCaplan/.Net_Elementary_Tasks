@@ -10,23 +10,6 @@ namespace Task3
         private const string MESSAGE_TRIANGLE_ADD = @"Add triangle: <name>, <sideA>, <sideB>, <sideC>";
         private const string MESSAGE_CONTINUE_ADDING = @"Add new triangle? y/yes -> continue  | any other -> print";
 
-        private IList<Triangle> _triangles;
-
-        public TriangleView(IList<Triangle> triangles)
-        {
-            _triangles = triangles ?? new List<Triangle>();
-        }
-        public TriangleView()
-        {
-            _triangles = new List<Triangle>();
-        }
-
-        public IList<Triangle> Triangles
-        {
-            get => _triangles;
-            set => _triangles = value;
-        }
-
         public void Display(string message = "")
         {
             Console.WriteLine(message);
@@ -43,7 +26,7 @@ namespace Task3
             Console.WriteLine(MESSAGE_CONTINUE_ADDING);
         }
 
-        public void DisplayTriangles()
+        public void DisplayTriangles(IReadOnlyCollection<Triangle> _triangles)
         {
             Console.WriteLine("============= Triangles list: ===============");
 
@@ -62,9 +45,9 @@ namespace Task3
         public TriangleDTO RequestTriangle()
         {
             Console.WriteLine(MESSAGE_TRIANGLE_ADD);
-            string[] arguments = Console.ReadLine().Split(',');
+            string[] arguments = Console.ReadLine()?.Split(',');
 
-            if (arguments.Length != 4)
+            if (arguments?.Length != 4)
             {
                 throw new ArgumentOutOfRangeException("argument line", "Must be 4 arguments");
             }
@@ -74,7 +57,7 @@ namespace Task3
             double sideB = double.Parse(arguments[2]);
             double sideC = double.Parse(arguments[3]);
 
-            return new TriangleDTO(name, new TriangleSides(sideA,sideB,sideC));
+            return new TriangleDTO(sideA,sideB,sideC,name);
         }
     }
 }

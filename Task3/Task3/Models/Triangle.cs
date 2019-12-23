@@ -4,51 +4,49 @@ namespace Task3.Models
 {
     public class Triangle : IComparable<Triangle>
     {
-        private readonly string _name;
-        private readonly TriangleSides _sides;
         private readonly double _area;
         private readonly double _perimeter;
 
-        private Triangle(TriangleSides triangleSides, string name = "")
+        private Triangle(double sideA, double sideB, double sideC, string name = "")
         {
-            _sides = triangleSides;
-            _name = name;
+            Name = name;
+            SideA = sideA;
+            SideB = sideB;
+            SideC = sideC;
             _perimeter = CalculatePerimeter();
             _area = CalculateArea();
         }
 
-        public string Name
-        {
-            get => _name;
-        }
+        public string Name { get; }
 
-        public TriangleSides Sides
-        {
-            get => _sides;
-        }
+        public double SideA { get; }
 
-        public double Area
-        {
-            get => _area;
-        }
+        public double SideB { get; }
 
-        public double Perimeter
-        {
-            get => _perimeter;
-        }
+        public double SideC { get; }
 
-        public static Triangle Build(TriangleSides triangleSides, string name = "")
+        public double Area => _area;
+
+        public double Perimeter => _perimeter;
+
+        public static Triangle Build(double sideA, double sideB, double sideC, string name = "")
         {
-            if (triangleSides.SideA + triangleSides.SideB > triangleSides.SideC
-             && triangleSides.SideA + triangleSides.SideC > triangleSides.SideB
-             && triangleSides.SideB + triangleSides.SideC > triangleSides.SideA)
+            if (sideA + sideB > sideC
+             && sideA + sideC > sideB
+             && sideB + sideC > sideA)
             {
-                return new Triangle(triangleSides, name);
+                return new Triangle(sideA, sideB, sideC, name);
             }
             else
             {
-                throw new ArgumentOutOfRangeException("triangleSides", "Can't build a triangle with given sides");
+                throw new ArgumentOutOfRangeException("triangleSides",
+                    "Can't build a triangle with given sides");
             }
+        }
+
+        public static Triangle Build(TriangleDTO triangle)
+        {
+            return Build(triangle.SideA, triangle.SideB, triangle.SideC, triangle.Name);
         }
 
         public int CompareTo(Triangle other)
@@ -58,33 +56,31 @@ namespace Task3.Models
 
                 return -1;
             }
-            else if (Area < other.Area)
+
+            if (Area < other.Area)
             {
 
                 return 1;
             }
-            else
-            {
 
-                return 0;
-            }
+            return 0;
         }
 
         private double CalculateArea()
         {
             double halpPerimeter = _perimeter / 2;
 
-            double area = Math.Sqrt(halpPerimeter 
-                                    * (halpPerimeter - _sides.SideA)
-                                    * (halpPerimeter - _sides.SideB) 
-                                    * (halpPerimeter - _sides.SideC));
+            double area = Math.Sqrt(halpPerimeter
+                                    * (halpPerimeter - SideA)
+                                    * (halpPerimeter - SideB)
+                                    * (halpPerimeter - SideC));
 
-            return area; 
+            return area;
         }
 
         private double CalculatePerimeter()
         {
-            return _sides.SideA + _sides.SideB + _sides.SideC;
+            return SideA + SideB + SideC;
         }
     }
 }
