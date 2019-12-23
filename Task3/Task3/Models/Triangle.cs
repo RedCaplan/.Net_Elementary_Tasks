@@ -54,13 +54,13 @@ namespace Task3.Models
             if (Area > other.Area)
             {
 
-                return -1;
+                return 1;
             }
 
             if (Area < other.Area)
             {
 
-                return 1;
+                return -1;
             }
 
             return 0;
