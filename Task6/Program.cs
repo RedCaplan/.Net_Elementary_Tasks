@@ -12,7 +12,7 @@ namespace Task6
                 .CreateLogger();
 
             Log.Information("New start with args: {args}", args);
-            TicketView ticketView = new TicketView();
+            TicketView ticketView = new TicketView(args);
             TicketController ticketController = new TicketController(ticketView);
             ticketController.Run();
         }

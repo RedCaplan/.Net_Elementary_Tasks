@@ -30,7 +30,6 @@ namespace Task6
             Console.WriteLine(Messages.MESSAGE_HELP);
         }
 
-
         public string GetModeFilePath()
         {
             if (_args.Length < 1)

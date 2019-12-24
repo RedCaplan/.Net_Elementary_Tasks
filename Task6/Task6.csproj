@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="Constants\Messages.cs" />
     <Compile Include="Constants\Settings.cs" />
-    <Compile Include="ExtensionMethods\IntExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Models\Enums\TicketCounterMode.cs" />
     <Compile Include="Models\MoscowTicketCounter.cs" />
     <Compile Include="Models\PiterTicketCounter.cs" />

@@ -1,23 +1,17 @@
-﻿using Task6.ExtensionMethods;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Task6.Extensions;
 
 namespace Task6.Models
 {
     public abstract class TicketCounter
     {
-        protected readonly TicketGenerator _ticketGenerator;
-        protected readonly int _ranks;
-
-        protected TicketCounter(TicketGenerator ticketGenerator)
-        {
-            _ticketGenerator = ticketGenerator;
-            _ranks = ticketGenerator.MaxRange.DigitArrayLength();
-        }
-
         public virtual int CountLuckyTickets()
         {
             int result = 0;
 
-            foreach (Ticket ticket in _ticketGenerator)
+            foreach (Ticket ticket in _tickets)
             {
                 if (IsLucky(ticket))
                 {
@@ -29,5 +23,15 @@ namespace Task6.Models
         }
 
         public abstract bool IsLucky(Ticket ticket);
+
+
+        protected readonly IEnumerable<Ticket> _tickets;
+        protected readonly int _ranks;
+
+        protected TicketCounter(IEnumerable<Ticket> tickets)
+        {
+            _tickets = tickets;
+            _ranks = tickets.Max(t=>t.Number).DigitArrayLength();
+        }
     }
 }
