@@ -27,12 +27,12 @@ namespace Task3
             Console.WriteLine(MESSAGE_CONTINUE_ADDING);
         }
 
-        public void DisplayTriangles(IReadOnlyCollection<Triangle> _triangles)
+        public void DisplayTriangles(IReadOnlyCollection<Triangle> triangles)
         {
             Console.WriteLine("============= Triangles list: ===============");
 
             int index = 1;
-            foreach (var triangle in _triangles)
+            foreach (var triangle in triangles)
             {
                 Console.WriteLine("{0}. [Triangle {1}]: {2:N2} сm", index++, triangle.Name, triangle.Area);
             }

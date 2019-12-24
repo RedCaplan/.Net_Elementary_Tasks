@@ -51,11 +51,12 @@
   <ItemGroup>
     <Compile Include="Constants\Messages.cs" />
     <Compile Include="Constants\Settings.cs" />
-    <Compile Include="Constants\TicketCounterNames.cs" />
-    <Compile Include="ExtensionMethods\IntExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Models\Enums\TicketCounterMode.cs" />
     <Compile Include="Models\MoscowTicketCounter.cs" />
     <Compile Include="Models\PiterTicketCounter.cs" />
     <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketCounterFactory.cs" />
     <Compile Include="Models\TicketGeneratorDTO.cs" />
     <Compile Include="TicketController.cs" />
     <Compile Include="Models\TicketCounter.cs" />
@@ -66,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

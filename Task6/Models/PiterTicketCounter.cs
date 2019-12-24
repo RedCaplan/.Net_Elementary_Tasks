@@ -1,10 +1,11 @@
-﻿using Task6.ExtensionMethods;
+﻿using System.Collections.Generic;
+using Task6.Extensions;
 
 namespace Task6.Models
 {
     public class PiterTicketCounter : TicketCounter
     {
-        public PiterTicketCounter(TicketGenerator ticketGenerator) : base(ticketGenerator)
+        public PiterTicketCounter(IEnumerable<Ticket> tickets) : base(tickets)
         {
         }
 

@@ -59,6 +59,7 @@ namespace Task3
                 string userInput = _triangleView.GetInput()?.ToLower();
                 isActive = CONTINUE_KEY.Contains(userInput);
             }
+            _triangles.Sort();
             _triangleView.DisplayTriangles(_triangles.AsReadOnly());
         }
 
