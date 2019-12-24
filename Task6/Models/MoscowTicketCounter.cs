@@ -12,7 +12,8 @@ namespace Task6.Models
         public override bool IsLucky(Ticket ticket)
         {
             bool isLucky = false;
-            int[] sequence = ticket.Number.ToArray(_ranks, (_ranks-ticket.Number.DigitArrayLength())/2);
+            int startPos = (_ranks - ticket.Number.DigitArrayLength()) / 2;
+            int[] sequence = ticket.Number.ToArray(_ranks, startPos);
             int sum = 0;
 
             for (int i = 0; i < sequence.Length / 2; i++)
