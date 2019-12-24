@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Task6.Extensions;
 
@@ -7,6 +6,15 @@ namespace Task6.Models
 {
     public abstract class TicketCounter
     {
+        protected readonly IEnumerable<Ticket> _tickets;
+        protected readonly int _ranks;
+
+        protected TicketCounter(IEnumerable<Ticket> tickets)
+        {
+            _tickets = tickets;
+            _ranks = tickets.Max(t => t.Number).DigitArrayLength();
+        }
+
         public virtual int CountLuckyTickets()
         {
             int result = 0;
@@ -23,15 +31,5 @@ namespace Task6.Models
         }
 
         public abstract bool IsLucky(Ticket ticket);
-
-
-        protected readonly IEnumerable<Ticket> _tickets;
-        protected readonly int _ranks;
-
-        protected TicketCounter(IEnumerable<Ticket> tickets)
-        {
-            _tickets = tickets;
-            _ranks = tickets.Max(t=>t.Number).DigitArrayLength();
-        }
     }
 }

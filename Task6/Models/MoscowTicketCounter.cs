@@ -1,10 +1,11 @@
-﻿using Task6.Extensions;
+﻿using System.Collections.Generic;
+using Task6.Extensions;
 
 namespace Task6.Models
 {
     public class MoscowTicketCounter : TicketCounter
     {
-        public MoscowTicketCounter(TicketGenerator ticketGenerator) : base(ticketGenerator)
+        public MoscowTicketCounter(IEnumerable<Ticket> tickets) : base(tickets)
         {
         }
 
