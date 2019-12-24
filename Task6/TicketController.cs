@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using Serilog;
-using Task6.Constants;
 using Task6.Models;
+using Task6.Models.Enums;
 
 namespace Task6
 {
@@ -22,7 +22,8 @@ namespace Task6
             {
                 TicketGeneratorDTO generatorDTO = _ticketView.GetTicketGenerator();
                 TicketGenerator ticketGenerator = TicketGenerator.Build(generatorDTO);
-                TicketCounter ticketCounter = ParseTicketCounter(ticketGenerator);
+                TicketCounterMode mode = GetTicketCounterMode();
+                TicketCounter ticketCounter = TicketCounterFactory.Build(mode,ticketGenerator);
                 int luckyTickets = ticketCounter.CountLuckyTickets();
 
                 message = string.Format("Lucky tickets count: {0}", luckyTickets);
@@ -52,7 +53,7 @@ namespace Task6
             _ticketView.Display(message);
         }
 
-        private TicketCounter ParseTicketCounter(TicketGenerator generator)
+        private TicketCounterMode GetTicketCounterMode()
         {
             string path = _ticketView.GetModeFilePath();
             if (!File.Exists(path))
@@ -63,31 +64,12 @@ namespace Task6
             string mode;
             using (StreamReader streamReader = new StreamReader(path))
             {
-                mode = streamReader.ReadLine()?.ToLower();
-                Log.Information("Getted mode: {mode}", mode);
+                mode = streamReader.ReadLine();
             }
+            Enum.TryParse(mode, out TicketCounterMode ticketCounterMode);
+            Log.Information("Getted mode: {mode}", ticketCounterMode);
 
-            TicketCounter ticketCounter;
-            switch (mode)
-            {
-                case TicketCounterNames.MOSCOW:
-                    {
-                        ticketCounter = new MoscowTicketCounter(generator);
-                        break;
-                    }
-                case TicketCounterNames.PITER:
-                    {
-                        ticketCounter = new PiterTicketCounter(generator);
-                        break;
-                    }
-                default:
-                    {
-                        throw new ArgumentOutOfRangeException("mode",
-                            "No such method of counting");
-                    }
-            }
-
-            return ticketCounter;
+            return ticketCounterMode;
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Task6.Models.MoscowTicketCounter">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MoscowTicketCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Task6.Models.PiterTicketCounter">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\PiterTicketCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Task6.Models.TicketCounter">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAEAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\TicketCounter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Task6.Models.TicketGenerator">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAICBAAAAAAIAAAAAAAgAAEAAAAACAAAAA=</HashCode>
+      <FileName>Models\TicketGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Task6.TicketController">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>TicketController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Task6.TicketView">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACAAAAAAAAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>TicketView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
